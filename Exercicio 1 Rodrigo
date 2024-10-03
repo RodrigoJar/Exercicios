@@ -1,0 +1,74 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Exercicio HTML" content="HTML">
+    <style sans></style>
+    <link rel="stylesheet" href="styles.css">
+    <h1><header>Boas vindas</header></h1>
+</head>
+<body>
+    <h3>Digite seu Nome:</h3>
+    <input type="text" id="nome" placeholder="Nome" required> <br><br>
+    <button onclick="verificarNome()">Enviar</button>
+    
+    <div id="mensagem" class="mensagem"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+------------------------------------------------------------------------
+CSS
+
+body {
+    font-family: 'Sans', sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: red;
+}
+
+.mensagem {
+    margin-top: 20px;
+    color: #ff0000;
+}
+------------------------------------------------------
+JAVASCRIPT
+function verificarNome() {
+    const nomeField = document.getElementById('nome');
+    const nome = nomeField.value.trim();
+    const mensagemDiv = document.getElementById('mensagem');
+
+    if (nome === '') {
+        mensagemDiv.textContent = 'Por Favor, insira seu nome.';
+        mensagemDiv.style.color = 'red'; // Alerta em vermelho
+    } else {
+        mensagemDiv.textContent = 'Olá, ' + nome + '!';
+        mensagemDiv.style.color = 'green'; // Saudação em verde
+    }
+}
