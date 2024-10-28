@@ -1,0 +1,88 @@
+// Grupo 5: Frederick,Rodrigo,Pedro Lucas,Gianluca
+
+
+
+
+void setup() {
+  Serial.begin(9600); // Inicia a comunicação serial a 9600 bps
+  Serial.println("Aguardando dados...");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String input = Serial.readStringUntil('\n'); // Lê até nova linha
+    processInput(input); // Processa os dados recebidos
+  }
+}
+
+void processInput(String input) {
+  // Tenta converter a entrada para um número
+  int number = input.toInt();
+  
+  // Verifica se a conversão foi bem-sucedida
+  if (String(number) == input) { // Se a string convertida é igual à entrada
+    Serial.print("Número recebido: ");
+    Serial.println(number);
+    
+    // Aqui você pode fazer outras operações com o número
+    // Por exemplo, acumular a soma
+    static int sum = 0;
+    sum += number;
+    
+    Serial.print("Soma acumulada: ");
+    Serial.println(sum);
+  } else {
+    // Se não for um número válido
+    Serial.println("Erro: Entrada inválida. Por favor, insira um número.");
+  }
+}
+-----------------------------------------------------
+// Notas e frequências
+#define NOTE_E4  329
+#define NOTE_Gs4 415 // G# em notação correta
+#define NOTE_A4  440
+#define NOTE_B4  493
+#define NOTE_Cs4 277 // C# em notação correta
+#define NOTE_C4  261
+
+// Melodia de Bella Ciao
+int melody[] = {
+  NOTE_E4, NOTE_E4, NOTE_E4, NOTE_Gs4,
+  NOTE_E4, NOTE_E4, NOTE_E4, NOTE_Gs4,
+  NOTE_A4, NOTE_B4, NOTE_Cs4, NOTE_A4,
+  NOTE_E4, NOTE_E4, NOTE_E4, NOTE_Gs4,
+  NOTE_E4, NOTE_E4, NOTE_E4, NOTE_Gs4,
+  NOTE_A4, NOTE_B4, NOTE_Cs4, NOTE_A4
+};
+
+// Durações das notas
+int noteDurations[] = {
+  500, 500, 500, 500,
+  500, 500, 500, 500,
+  500, 500, 500, 500,
+  500, 500, 500, 500,
+  500, 500, 500, 500,
+  500, 500, 500, 500
+};
+
+void setup() {
+  // Nada a ser feito aqui
+}
+
+void loop() {
+  // Toca a melodia
+  for (int thisNote = 0; thisNote < 24; thisNote++) {
+    int noteDuration = noteDurations[thisNote];
+    tone(8, melody[thisNote], noteDuration);
+
+    // Calcula o tempo da nota + pausa
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+
+    // Para o som
+    noTone(8);
+  }
+  // Adiciona um atraso antes de repetir
+  delay(2000);
+}
+------------------------------------------------------
